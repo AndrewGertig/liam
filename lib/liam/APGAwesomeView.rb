@@ -57,7 +57,7 @@ class APGAwesomeView < UIView
   #ifdef __IPHONE_7_0 
 
   def dimmedGradientColors
-    ap "UHOH DOING SOME IOS 7 STUFF ----------!!!!!!!!"
+    puts "[APGAwesomeView] -  UHOH DOING SOME IOS 7 STUFF ----------!!!!!!!!"
 
     if (!@dimmedGradientColors)
       dimmed = self.gradientColors
@@ -244,14 +244,12 @@ class APGAwesomeView < UIView
 
     #ifdef __IPHONE_7_0
     if (self.respondsToSelector("tintAdjustmentMode") && self.tintAdjustmentMode == UIViewTintAdjustmentModeDimmed)
-      ap "UHOH DOING SOME IOS 7 STUFF ----------!!!!!!!!"
+      puts "[APGAwesomeView] - UHOH DOING SOME IOS 7 STUFF ----------!!!!!!!!"
       locations = self.dimmedGradientColors.length == self.gradientLocations.length ? self.gradientLocations : nil
       self.gradient = APGGradientCreateWithColorsAndLocations(self.dimmedGradientColors, locations)
       return
     end
     #endif
-
-    ap "Setting the Gradient!!! with colors: #{self.gradientColors}, and locations: #{self.gradientLocations}"
 
     @gradient = APGGradientCreateWithColorsAndLocations(self.gradientColors, self.gradientLocations)
   end

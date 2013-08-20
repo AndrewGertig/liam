@@ -21,8 +21,8 @@ class APGAwesomeView < UIView
   # iOS7
   attr_accessor :dimmedGradientColors
 
-    APGGradientViewDirectionVertical = 0
-    APGGradientViewDirectionHorizontal = 1
+  APGGradientViewDirectionVertical = 0
+  APGGradientViewDirectionHorizontal = 1
 
 
   def gradient=(gradient)
@@ -56,34 +56,34 @@ class APGAwesomeView < UIView
 
   #ifdef __IPHONE_7_0 
 
-  def dimmedGradientColors
-    puts "[APGAwesomeView] -  UHOH DOING SOME IOS 7 STUFF ----------!!!!!!!!"
+  # def dimmedGradientColors
+  #   puts "[APGAwesomeView] -  UHOH DOING SOME IOS 7 STUFF ----------!!!!!!!!"
 
-    if (!@dimmedGradientColors)
-      dimmed = self.gradientColors
+  #   if (!@dimmedGradientColors)
+  #     dimmed = self.gradientColors
 
-      dimmed.each_with_index do |color, index|
-        hue        = Pointer.new(:float)
-        saturation = Pointer.new(:float)
-        brightness = Pointer.new(:float)
-        alpha      = Pointer.new(:float)
+  #     dimmed.each_with_index do |color, index|
+  #       hue        = Pointer.new(:float)
+  #       saturation = Pointer.new(:float)
+  #       brightness = Pointer.new(:float)
+  #       alpha      = Pointer.new(:float)
 
-        color.getHue(hue, saturation(saturation, brightness:brightness, alpha:alpha))
-        # dimmed.replaceObjectAtIndex(index, withObject(UIColor.colorWithHue(hue, saturation:0, brightness:brightness, alpha:alpha)))
-        dimmed[index] = UIColor.colorWithHue(hue[0], saturation:0, brightness:brightness[0], alpha:alpha[0])
-      end
+  #       color.getHue(hue, saturation(saturation, brightness:brightness, alpha:alpha))
+  #       # dimmed.replaceObjectAtIndex(index, withObject(UIColor.colorWithHue(hue, saturation:0, brightness:brightness, alpha:alpha)))
+  #       dimmed[index] = UIColor.colorWithHue(hue[0], saturation:0, brightness:brightness[0], alpha:alpha[0])
+  #     end
 
-      return dimmed
-    end
+  #     return dimmed
+  #   end
 
-    return @dimmedGradientColors
-  end
+  #   return @dimmedGradientColors
+  # end
 
 
-  def dimmedGradientColors=(colors)
-    @dimmedGradientColors = colors
-    self.refreshGradient
-  end
+  # def dimmedGradientColors=(colors)
+  #   @dimmedGradientColors = colors
+  #   self.refreshGradient
+  # end
 
   #endif 
 
@@ -226,12 +226,10 @@ class APGAwesomeView < UIView
   end
 
   #ifdef __IPHONE_7_0
-
-  def tintColorDidChange
-    super.tintColorDidChange
-    self.refreshGradient
-  end
-
+  # def tintColorDidChange
+  #   super.tintColorDidChange
+  #   self.refreshGradient
+  # end
   #endif
 
   #pragma mark - Private 
@@ -243,12 +241,12 @@ class APGAwesomeView < UIView
   def refreshGradient
 
     #ifdef __IPHONE_7_0
-    if (self.respondsToSelector("tintAdjustmentMode") && self.tintAdjustmentMode == UIViewTintAdjustmentModeDimmed)
-      puts "[APGAwesomeView] - UHOH DOING SOME IOS 7 STUFF ----------!!!!!!!!"
-      locations = self.dimmedGradientColors.length == self.gradientLocations.length ? self.gradientLocations : nil
-      self.gradient = APGGradientCreateWithColorsAndLocations(self.dimmedGradientColors, locations)
-      return
-    end
+    # if (self.respondsToSelector("tintAdjustmentMode") && self.tintAdjustmentMode == UIViewTintAdjustmentModeDimmed)
+    #   puts "[APGAwesomeView] - UHOH DOING SOME IOS 7 STUFF ----------!!!!!!!!"
+    #   locations = self.dimmedGradientColors.length == self.gradientLocations.length ? self.gradientLocations : nil
+    #   self.gradient = APGGradientCreateWithColorsAndLocations(self.dimmedGradientColors, locations)
+    #   return
+    # end
     #endif
 
     @gradient = APGGradientCreateWithColorsAndLocations(self.gradientColors, self.gradientLocations)
